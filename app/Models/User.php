@@ -46,4 +46,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function dlcs()
+    {
+        return $this->belongsToMany(
+            Dlc::class, 'user_dlcs'
+        )->withPivot('granted_at');
+    }
 }
