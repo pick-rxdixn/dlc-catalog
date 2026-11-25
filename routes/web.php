@@ -9,6 +9,22 @@ Route::get('/', function () {
     return view('catalog');
 });
 
+Route::get('/dlcs/{id}', function ($id) {
+    return view('dlc', ['id' => $id]);
+})->whereNumber('id');
+
+Route::middleware('guest')->group(function () {
+
+    Route::get('/login', function () {
+        return view('login');
+    })->name('login');
+
+    Route::get('/register', function () {
+        return view('register');
+    })->name('register');
+
+});
+
 Route::prefix('api')->group(function () {
 
     Route::post('/register', [AuthController::class, 'register']);
