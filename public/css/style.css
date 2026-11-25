@@ -241,3 +241,33 @@ button:disabled {
     color: #f87171;
     white-space: pre-line;
 }
+
+#library-count {
+    color: #9ca3af;
+    margin-bottom: 24px;
+}
+
+.granted-date {
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+.owned-status {
+    color: #4ade80;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.empty-library {
+    grid-column: 1 / -1;
+    padding: 40px;
+    text-align: center;
+    background: #191f2b;
+    border: 1px solid #303847;
+    border-radius: 10px;
+}
+
+.empty-library p {
+    color: #9ca3af;
+    margin-bottom: 20px;
+}

@@ -25,6 +25,10 @@ Route::middleware('guest')->group(function () {
 
 });
 
+Route::get('/library', function () {
+    return view('library');
+})->middleware('auth')->name('library');
+
 Route::prefix('api')->group(function () {
 
     Route::post('/register', [AuthController::class, 'register']);
