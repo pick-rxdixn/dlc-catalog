@@ -6,7 +6,7 @@ use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\LibraryController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('catalog');
 });
 
 Route::prefix('api')->group(function () {
