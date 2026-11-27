@@ -25,12 +25,14 @@
         <button id="reset-filters">Сбросить</button>
     </div>
 
-    <div id="catalog" class="catalog-grid">
+    <div id="catalog"
+     class="catalog-grid"
+     data-auth="{{ auth()->check() ? '1' : '0' }}">
         <p>Загрузка дополнений...</p>
     </div>
 
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/catalog.js') }}"></script>
+    <script src="{{ asset('js/catalog.js') }}?v=3"></script>
 @endsection

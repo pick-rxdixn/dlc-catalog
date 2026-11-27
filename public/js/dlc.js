@@ -22,6 +22,14 @@ async function loadDlc() {
 
         const dlc = await response.json();
 
+        if (dlc.image) {
+            const cover = document.getElementById('dlc-cover');
+
+            cover.src = dlc.image;
+            cover.alt = dlc.title;
+            cover.hidden = false;
+        }
+
         document.title = dlc.title + ' — DLC Catalog';
 
         document.getElementById('dlc-title').textContent =
@@ -35,6 +43,9 @@ async function loadDlc() {
 
         document.getElementById('dlc-description').textContent =
             dlc.description;
+
+        document.getElementById('dlc-full-description').textContent =
+            dlc.full_description || dlc.description;
 
         if (isAuthenticated) {
             await checkLibrary();

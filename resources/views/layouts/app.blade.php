@@ -7,7 +7,7 @@
 
     <title>@yield('title', 'DLC Catalog')</title>
 
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}?v=5">
 </head>
 <body>
 

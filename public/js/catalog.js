@@ -3,6 +3,32 @@ const search = document.getElementById('search');
 const gameFilter = document.getElementById('game-filter');
 const categoryFilter = document.getElementById('category-filter');
 const resetButton = document.getElementById('reset-filters');
+const ownedDlcIds = new Set();
+
+// Загрузка полученных дополнений
+async function loadOwnedDlcs() {
+    ownedDlcIds.clear();
+
+    if (catalog.dataset.auth !== '1') {
+        return;
+    }
+
+    try {
+        const response = await apiRequest('/api/library');
+
+        if (!response.ok) {
+            return;
+        }
+
+        const dlcs = await response.json();
+
+        dlcs.forEach(dlc => {
+            ownedDlcIds.add(dlc.id);
+        });
+    } catch (error) {
+        console.error('Ошибка загрузки библиотеки', error);
+    }
+}
 
 // Загрузка игр и категорий
 async function loadFilters() {
@@ -69,6 +95,16 @@ function renderCatalog(dlcs) {
         const card = document.createElement('article');
         card.className = 'dlc-card';
 
+        if (dlc.image) {
+            const image = document.createElement('img');
+            image.className = 'dlc-image';
+            image.src = dlc.image;
+            image.alt = dlc.title;
+            image.loading = 'lazy';
+
+            card.appendChild(image);
+        }
+
         const game = document.createElement('p');
         game.className = 'game-name';
         game.textContent = dlc.game.title;
@@ -88,7 +124,17 @@ function renderCatalog(dlcs) {
         link.href = '/dlcs/' + dlc.id;
         link.textContent = 'Подробнее';
 
-        card.append(game, title, category, description, link);
+        card.append(game, title, category, description);
+
+        if (ownedDlcIds.has(dlc.id)) {
+            const status = document.createElement('p');
+            status.className = 'owned-status';
+            status.textContent = '✓ В библиотеке';
+
+            card.appendChild(status);
+        }
+
+        card.appendChild(link);
         catalog.appendChild(card);
     });
 }
@@ -110,6 +156,7 @@ resetButton.addEventListener('click', function () {
 async function init() {
     try {
         await loadFilters();
+        await loadOwnedDlcs();
         await loadCatalog();
     } catch (error) {
         catalog.textContent = 'Ошибка загрузки данных';

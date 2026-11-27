@@ -19,5 +19,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/library.js') }}"></script>
+    <script src="{{ asset('js/library.js') }}?v=2"></script>
 @endsection

@@ -53,6 +53,16 @@ function renderLibrary(dlcs) {
         const card = document.createElement('article');
         card.className = 'dlc-card';
 
+        if (dlc.image) {
+            const image = document.createElement('img');
+            image.className = 'dlc-image';
+            image.src = dlc.image;
+            image.alt = dlc.title;
+            image.loading = 'lazy';
+
+            card.appendChild(image);
+        }
+
         const game = document.createElement('p');
         game.className = 'game-name';
         game.textContent = dlc.game.title;

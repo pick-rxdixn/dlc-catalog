@@ -12,6 +12,10 @@
              data-id="{{ $id }}"
              data-auth="{{ Auth::check() ? '1' : '0' }}">
 
+        <img id="dlc-cover" class="dlc-cover" alt="" hidden>
+
+        <div class="dlc-info">
+
         <p id="dlc-game" class="game-name"></p>
 
         <h1 id="dlc-title">Загрузка...</h1>
@@ -32,10 +36,17 @@
 
         <p id="message"></p>
 
+        </div>
+
     </article>
+
+    <section class="dlc-full-description">
+        <h2>О дополнении</h2>
+        <p id="dlc-full-description"></p>
+    </section>
 
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/dlc.js') }}"></script>
+    <script src="{{ asset('js/dlc.js') }}?v=3"></script>
 @endsection
