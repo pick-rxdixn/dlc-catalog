@@ -11,6 +11,7 @@ class Dlc extends Model
         'category_id',
         'title',
         'description',
+        'full_description',
         'image',
     ];
 
