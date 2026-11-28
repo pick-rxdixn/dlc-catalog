@@ -38,15 +38,20 @@ Docker-контейнеров.
 
 ### 1. Клонирование репозитория
 
+```bash
 git clone https://github.com/pick-rxdixn/dlc-catalog.git
 cd dlc-catalog
+```
 
 ### 2. Создание файла конфигурации
 
+```bash
 cp .env.example .env
+```
 
 В файле `.env` необходимо установить следующие параметры:
 
+```env
 APP_NAME="DLC Catalog"
 APP_ENV=local
 APP_DEBUG=true
@@ -60,40 +65,55 @@ DB_USERNAME=dlc_user
 DB_PASSWORD=dev_password_2026
 
 SESSION_DRIVER=database
+```
 
 Указанные параметры предназначены для локального запуска
 приложения.
 
 ### 3. Сборка и запуск Docker-контейнеров
 
+```bash
 docker compose up -d --build
+```
 
 Проверка состояния контейнеров:
 
+```bash
 docker compose ps
+```
 
 ### 4. Установка зависимостей Laravel
 
+```bash
 docker compose exec app composer install
+```
 
 ### 5. Генерация ключа приложения
 
+```bash
 docker compose exec app php artisan key:generate
+```
 
 ### 6. Настройка прав доступа
 
 Для корректной работы Laravel необходимо предоставить
 права записи в служебные директории:
 
+```bash
 bash scripts/fix-permissions.sh
+```
 
 ### 7. Создание структуры базы данных
 
+```bash
 docker compose exec -u www-data app php artisan migrate
+```
 
 ### 8. Заполнение базы данных
 
+```bash
 docker compose exec -u www-data app php artisan db:seed
+```
 
 В результате в базе данных будут созданы записи
 о трёх играх, трёх категориях и девяти дополнениях.
@@ -122,11 +142,15 @@ http://localhost:8080
 
 ## Остановка приложения
 
+```bash
 docker compose stop
+```
 
 ## Повторный запуск
 
+```bash
 docker compose up -d
+```
 
 При повторном запуске установка зависимостей,
 выполнение миграций и заполнение базы данных
@@ -135,7 +159,9 @@ docker compose up -d
 
 ## Удаление контейнеров
 
+```bash
 docker compose down
+```
 
 Данные PostgreSQL сохраняются в постоянном Docker-томе.
 
